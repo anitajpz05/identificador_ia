@@ -1,0 +1,98 @@
+import random
+
+
+def generar_correo():
+    palabras = random.randint(0,10)
+    exclam = random.randint(0,15)
+    longitud = random.randint(20,1000)
+    link = random.choice([0,1])
+    dominio = random.choice([0,1])  
+
+    score = palabras*2 + exclam + link*3 - dominio*2
+
+    if score > 15:
+        tipo = "spam"
+    else:
+        tipo = "ham"
+
+    importancia = "ninguna"
+    if tipo == "ham":
+        if dominio==1 and longitud>500:
+            importancia = "muy importante"
+        elif longitud>200:
+            importancia = "importante"
+        else:
+            importancia = "poco importante"
+
+    return [palabras,exclam,longitud,link,dominio], tipo, importancia
+
+
+
+dataset = [generar_correo() for _ in range(5000)]
+
+
+split = int(len(dataset)*0.7)
+train = dataset[:split]
+test = dataset[split:]
+
+
+
+def clasificar_spam(datos):
+    palabras,exclam,longitud,link,dominio = datos
+    score = palabras*2 + exclam + link*3 - dominio*2
+    return "spam" if score>15 else "ham"
+
+
+
+def clasificar_importancia(datos):
+    palabras,exclam,longitud,link,dominio = datos
+
+    if dominio==1 and longitud>500:
+        return "muy importante"
+    elif longitud>200:
+        return "importante"
+    else:
+        return "poco importante"
+
+
+def evaluar():
+    correctos = 0
+
+    for datos,tipo,_ in test:
+        if clasificar_spam(datos)==tipo:
+            correctos+=1
+
+    print("Precisión Spam:", round(correctos/len(test)*100,2),"%")
+
+evaluar()
+
+
+def pedir_numero(texto):
+    while True:
+        try:
+            return int(input(texto))
+        except:
+            print("⚠️ Debes escribir un número.")
+
+palabras = pedir_numero("Frecuencia palabras clave: ")
+excl = pedir_numero("Cantidad de ! : ")
+longitud = pedir_numero("Longitud mensaje: ")
+link = pedir_numero("Tiene link? (1 si / 0 no): ")
+dominio = pedir_numero("Dominio confiable? (1 si / 0 no): ")
+
+print("\nPRUEBA MANUAL")
+
+palabras = pedir_numero("Frecuencia palabras clave: ")
+excl = pedir_numero("Cantidad de ! : ")
+longitud = pedir_numero("Longitud mensaje: ")
+link = pedir_numero("Tiene link? (1 si / 0 no): ")
+dominio = pedir_numero("Dominio confiable? (1 si / 0 no): ")
+
+correo = [palabras,excl,longitud,link,dominio]
+
+resultado = clasificar_spam(correo)
+print("\nTipo:",resultado)
+
+if resultado=="ham":
+    print("Importancia:",clasificar_importancia(correo))
+# identificador_ia
