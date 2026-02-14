@@ -1,6 +1,5 @@
 import random
 
-
 def generar_correo():
     palabras = random.randint(0,10)
     exclam = random.randint(0,15)
