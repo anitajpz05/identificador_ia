@@ -1,5 +1,5 @@
 Ana María Jiménez Pérez 
-Sistema de Clasificación Inteligente de Correos Electrónicos
+Sistema de Clasificación Inteligente de Correos Electrónicos 
 Introducción
 En la actualidad, el uso del correo electrónico constituye una herramienta esencial de comunicación tanto personal como profesional. Sin embargo, el incremento masivo de mensajes no deseados (spam) representa un problema significativo que afecta la productividad, la seguridad informática y la eficiencia en la gestión de información. Estos correos pueden contener publicidad invasiva, enlaces maliciosos o intentos de fraude, lo que obliga a implementar sistemas automatizados capaces de clasificarlos correctamente.
 Ante esta problemática, surge la necesidad de desarrollar soluciones basadas en técnicas de Inteligencia Artificial que permitan distinguir de forma automática entre correos legítimos y correos no deseados. Además, dentro de los correos legítimos resulta útil establecer niveles de prioridad para optimizar la atención del usuario. En este contexto, se diseñó e implementó un sistema de clasificación automática en consola utilizando aprendizaje automático supervisado.
